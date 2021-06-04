@@ -185,3 +185,29 @@ Roadmap:
  			- Va a quedar en la maquina local
 
 
+ 	TAREAS: 
+
+ 		1. Instalar NodeJS
+ 		2. Clonar repositorio de clase y correr con npm run dev (antes un: npm i)
+ 		3. Agregar dos estados: 
+ 			- GET /usuarios
+ 				- Devolver un JSON: 
+ 				- Array vacio: []
+ 			- GET /productos
+ 				- Devolver un JSON
+ 				- Array con un producto:
+ 					
+ 					[
+ 						{
+ 							nombre: "Manzana",
+ 							precio: 20
+ 						}
+ 					]
+ 			REF: https://expressjs.com/es/4x/api.html#res.set
+
+ 		4. crear estas modificaciones en una rama: develop/mi-nombre
+		 	- Ejemplo: develop/alex-casadevall
+
+		 	REF: https://bitbucket.org/lexart/clase-php-miercoles-ibec/src/master/
+
+
