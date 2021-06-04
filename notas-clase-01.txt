@@ -1,0 +1,187 @@
+Roadmap: 
+	
+	AC (Aceptance Criteria):
+
+	- Programar un backend (API REST) en NodeJS + ExpressJS con una base de datos MongoDB
+	- Que exponga servicios que se pueda consumir por una APP de FrontEnd (WebApp, App Mobile)
+	- Utilizacion de POSTMAN
+
+	API REST: 
+
+		Metodos HTTP, Endpoint
+
+		- GET url.com/usuarios -> Lista de usuarios -> Tipo JSON
+
+	EJEMPLO COMUN: 
+
+		- Ingreso a una URL tipo: w3school.com
+		- GET w3school.com -> HTML
+
+
+	JSON: Modelo de datos
+		JavaScript Object Notation: 
+
+		let persona = {
+			nombre: "Alex",
+			apellido: "Casadevall"
+		}
+
+
+		GET url.com/usuarios/1 -> {nombre: "Alex", apellido: "Casadevall"}
+
+		API REST: 
+
+			Peticiones (request):
+
+				Metodo, URL, [input/output] 
+
+		PETICION 1 - EJEMPLO: Obtener un usuario por ID 
+
+			- Metodo: GET
+			- URL: url.com/usuarios/1
+			- input: N/A *
+			- output: {nombre: "Alex", apellido: "Casadevall"} (Tipo JSON)
+
+		(*) Las peticiones con metodo GET no se ingresa input
+
+
+		PETICION 2 - EJEMPLO: Alta de un usuario al sistema
+
+			- Metodo: POST
+			- URL: url.com/usuarios
+			- input: {nombre: "Juan", apellido: "Casadevall"} (Tipo JSON)
+			- output: {response: true} (Tipo JSON)
+
+
+		1. Las peticiones ida y vuelta del backend (API) input/output son de tipo JSON
+		2. La arquitectura (a nivel de datos) del backend es cerrada por el mismo std de datos (JSON) para las peticiones
+		3. Todas las aplicaciones que se comunican con la API deben soportar el std de datos pautado (JSON)
+
+
+		Modelo CRUD:
+
+			- Create
+			- Read
+			- Update
+			- Delete
+
+		API REST 
+
+			- Metodo
+			- URL (Modelo)
+			-----
+			Rep. Estado
+
+			USUARIO: (ID, NOMBRE, APELLIDO, EMAIL)
+
+			FORMA CORRECTA: Create usuario: 
+
+				- POST (Corresponde a CREAR, por convencion)
+				- url.com/usuario (Representa al modelo usuario)
+				- input: {nombre: Alex, apellido: Casadevall, email: lexcasa@gmail.com}
+				- output: {response: true}
+
+				--- 
+				Estado: [Create: Usuario]
+
+			FORMA INCORRECTA: Create usuario: 
+
+				- POST (Corresponde a CREAR, por convencion)
+				- url.com/pepe18 (Representa al modelo usuario)
+				--- 
+				Estado: [Create: Usuario]
+
+		Read Usuario
+
+			REST: 
+				- Metodo
+				- URL (Modelo)
+				---
+				Read: Usuario
+
+		POSIBILIDADES: 
+			1. Obtenemos un usuario
+			2. Obtenemos todos los usuarios del modelo
+
+
+			ESTADO 1 - POSIBILIDAD 1:
+
+				- GET 
+				- url.com/usuario/1 -> url.com/modelo/[id] -> Propiedad unica del modelo seleccionado
+
+			ESTADO 2 - POSIBILIDAD 2:
+
+				- GET 
+				- url.com/usuario/all -> url.com/modelo/[all] -> Seria la excepcion a la regla particular
+
+		Update Usuario
+
+			1. El usuario ya existe
+
+				Caso inicial: 		(1, Alex, Casadevall, lexcasa@gmail.com)
+				Caso actualizado: 	(1, Juan, Casadevall, lexcasa@gmail.com)
+
+			2. Cual es la informacion que siempre se conserva?
+				- La propiedad unica del modelo (ID)
+
+			ESTADO Update Usuario:
+
+				- PUT 
+				- url.com/usuario/1
+				- Input (Payload): {id: 1, nombre: Juan, apellido: Casadevall, email: lexcasa@gmail.com}
+				- Output (Response): {response: true}
+
+			ESTADO Delete Usuario: 
+
+				- DELETE 
+				- url.com/usuario/1
+				- Input: (Opcional)
+				- Output: {response: true}
+
+	---- Modelo CRUD
+
+	COND. PARA EMPEZAR UNA API: 
+
+		- NodeJS 14.04 LTS 
+		- Gestor de paquetes (npm que ya viene con NodeJS)
+		- GIT
+
+
+	CREAR UN PROYECTO DE BACKEND EN NODEJS
+
+		1. npm init
+		2. Nos genera un archivo que se llama: package.json
+			- Instalar las dependencias de Node que necesitemos para nuestro backend
+		3. Crear un archivo app.js
+		4. node app.js 
+
+
+	- Como utilizar la funcionalidad calc dentro de la app?
+
+		- Exportar calculadora.js como un modulo
+		- Requerir la calculadora dentro de la app.js
+
+	- Como instalar dependencias a nuestro backend?
+
+		1. Tengo que instalar el modulo de ExpressJS
+		2. * Incorrecto para instalar: npm i express 
+			-> Instala el modulo(dep) pero no la graba
+			-> No guarda en el proyeto que tenemos una dependencia de express 
+
+		   * Correcto: npm i --save express 
+		   	-> Va a grabar la dependencia express en el package.json
+		   	-> Cuando me baje el backend, corro "npm i" y me instala las dependencias
+		   	que estan grabadas en el package.json
+
+		3. Nos genera una carpeta llamada: node_modules
+		4. Crear un archivo .gitignore y package-lock.json para ignorar la carpeta node_modules
+		   Que es facilmente descargable a partir del comando: npm i
+
+ 	EXCLUSIVAMENTE PARA DESARROLLO
+
+ 		1. Voy a instalar un modulo (global) nodemon
+ 		2. npm i -g nodemon 
+ 			- NO SE VA A INSTALAR EN EL BACKEND 
+ 			- Va a quedar en la maquina local
+
+
