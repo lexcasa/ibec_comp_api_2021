@@ -102,21 +102,23 @@ CRUD: Productos
 			Stock: (id, producto, cliente, cantidad, precio)
 
 			NOSQL
-			{
-				id: 10,
-				producto: {
-					nombre: "Manzana",
-					categoria: {
-						nombre: "Frutas"
-					}
-				},
-				cliente: {
-					nombre: "Alex",
-					esEmpresa: false
-				},
-				cantidad: 10,
-				precio: 100
-			}
+			[
+				{
+					id: 10,
+					producto: {
+						nombre: "Manzana",
+						categoria: {
+							nombre: "Frutas"
+						}
+					},
+					cliente: {
+						nombre: "Alex",
+						esEmpresa: false
+					},
+					cantidad: 10,
+					precio: 100
+				}
+			]
 
 			SERVICIOS: 
 
@@ -126,6 +128,30 @@ CRUD: Productos
 				- Buscar items por el nombre del producto
 				- Buscar items por el cliente
 				- Calcular el total por cliente
+
+					Respuesta:
+					[
+						{
+							cliente: "Alex",
+							total: 20
+						},
+						{
+							cliente: "Juan",
+							total: 100
+						}
+					]
 				- Calcular el total por producto
+
+					Respuesta:
+					[
+							{
+								producto: "Manzana",
+								total: 20
+							},
+							{
+								producto: "Pera",
+								total: 100
+							}
+					]
 
 			- TODOS LOS SERVICIOS EN UN POSTMAN para que pueda probar
