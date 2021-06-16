@@ -85,7 +85,7 @@ CRUD: Productos
 			}
 
 		- DELETE /productos/stock/egreso/:code/:cantidad
-			- /productos/stock/egreso/ABC123/5
+			- Ejemplo: /productos/stock/egreso/ABC123/5
 
 			Response: 
 
@@ -95,3 +95,37 @@ CRUD: Productos
 						"cantidad": 100
 					}
 				}
+
+	TAREA 
+
+		1. Crear un servicio CRUD del modelo
+			Stock: (id, producto, cliente, cantidad, precio)
+
+			NOSQL
+			{
+				id: 10,
+				producto: {
+					nombre: "Manzana",
+					categoria: {
+						nombre: "Frutas"
+					}
+				},
+				cliente: {
+					nombre: "Alex",
+					esEmpresa: false
+				},
+				cantidad: 10,
+				precio: 100
+			}
+
+			SERVICIOS: 
+
+				- Obtener items de stock
+				- Obtener item por ID
+				- Calcular el total de todos los items de stock
+				- Buscar items por el nombre del producto
+				- Buscar items por el cliente
+				- Calcular el total por cliente
+				- Calcular el total por producto
+
+			- TODOS LOS SERVICIOS EN UN POSTMAN para que pueda probar

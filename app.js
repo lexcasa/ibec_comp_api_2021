@@ -65,6 +65,21 @@ app.put('/productos/stock/ingreso', (req, res) => {
   res.send(producto)
 })
 
+// Obtener producto por codigo
+app.delete('/productos/:code/:cantidad', (req, res) => {
+
+  let producto   = {}
+  let productos  = Producto.getAllProductos()
+
+  const code     = req.params.code;
+  const cantidad = req.params.cantidad;
+
+  producto       = Producto.egresoStock(code, cantidad, productos)
+
+  res.set('Content-Type', 'application/json')
+  res.send(producto)
+})
+
 
 app.listen(port, () => {
   console.log(`New app listening at http://localhost:${port}`)

@@ -67,6 +67,24 @@ const Producto = {
 			}
 		})
 		return find
+	},
+	egresoStock: function (code, cantidad, arr){
+		let find = {}
+		arr.map( function (item){
+			if(item.cod === code){
+				let cantAnterior = item.stock.cantidad
+				cantNueva = cantAnterior - cantidad
+
+				find = {
+					cod: code,
+					stock: {
+						cantidad: cantNueva
+					}
+				}
+			}
+		})
+
+		return find
 	}
 }
 
