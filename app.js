@@ -1,6 +1,7 @@
 // Importo el modulo de express para nuestra app.js
 // Lo hago disponible globalmente dentro de la app
-const express = require('express')
+const express    = require('express')
+const bodyParser = require('body-parser')
 
 // invocar el express dentro la app
 const app = express()
@@ -8,35 +9,62 @@ const app = express()
 // Defino el puerto donde va a escuchar esta API REST
 const port = 3000
 
-// Defino el estado
-// Metodo, Ruta, Input/Output
-/*
-	- Metodo: .get 
-	- Ruta: /
-	- Input: req
-	- Outpu: res 
+app.use(bodyParser.json())
 
-	Estado : Raiz (o root)
+const Producto = require('./services/productos.service')
 
-*/
 app.get('/', (req, res) => {
 
   // Solo devuelve una respuesta
   // Con texto plano
-  res.send('Hello World!')
+  res.send('Bienvenidos a mi API!')
 })
 
-app.get('/pepe', (req, res) => {
-  res.send('Hola Pepe!')
+//
+// SERVICIO OBTENER PRODUCTOS
+// 
+app.get('/productos/all', (req, res) => {
+  const productos = Producto.getAllProductos()
+
+  res.set('Content-Type', 'application/json')
+  res.send(productos)
 })
 
-app.get('/gato', (req, res) => {
-  res.send('Hola cat!')
+// Obtener producto por codigo
+app.get('/productos/:code', (req, res) => {
+
+  let producto   = {}
+  let productos  = Producto.getAllProductos()
+
+  const code     = req.params.code;
+  producto       = Producto.getProductoByCode(code, productos)
+
+  res.set('Content-Type', 'application/json')
+  res.send(producto)
 })
 
-app.get('/perro', (req, res) => {
-  res.send('Hola dog!')
+
+// Consultar stock
+app.post('/productos/stock/consulta', (req, res) => {
+
+  let producto   = {}
+  let productos  = Producto.getAllProductos()
+  producto       = Producto.consultarStock(req.body, productos)
+
+  res.set('Content-Type', 'application/json')
+  res.send(producto)
 })
+
+app.put('/productos/stock/ingreso', (req, res) => {
+
+  let producto   = {}
+  let productos  = Producto.getAllProductos()
+  producto       = Producto.ingresoStock(req.body, productos)
+
+  res.set('Content-Type', 'application/json')
+  res.send(producto)
+})
+
 
 app.listen(port, () => {
   console.log(`New app listening at http://localhost:${port}`)

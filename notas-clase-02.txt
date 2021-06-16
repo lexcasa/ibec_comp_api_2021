@@ -1,0 +1,97 @@
+API CRUD: 
+
+	1. Create 
+	2. Read 
+	3. Update
+	4. Delete
+
+CRUD: Productos
+
+	- Modelo de Produto: (cod, nombre, categoria, precio, stock)
+
+
+	MYSQL: FORMA 1
+		Producto: (cod, nombre, codCategoria, precio, stock)
+		Categoria: (cod, nombre)
+
+	MYSQL: FORMA 2
+		Producto: (cod, nombre, precio, stock)
+		Categoria: (cod, nombre)
+
+		producto_categoria: (codProdcuto, codCategoria)
+
+
+	NOSQL
+
+	{
+		"cod":"ABC123",
+		"nombre": "Manzana",
+		"categoria": {
+			"cod":"CAT123",
+			"nombre":"Frutas"
+		},
+		"precio":100,
+		"stock": {
+			"existe": true, 
+			"cantidad": 105
+		}
+	}
+
+	- API: Todo el backend
+	- Servicio: (metodo, ruta)
+		- GET /usuarios/all
+
+
+	SERVICIOS
+		- GET /productos: Obtener todos los productos de un archivo
+		- GET /productos/:code ":code" va a ser el parametro para buscar el producto por su codigo
+			- GET /productos/ABC123 -> Me trae Manzana 
+
+
+	- GET /productos 		-> getAllProductos()
+	- GET /productos/:code  -> getProductByCode(code, arr)
+
+	Design pattern: Factory
+
+	CREATE / UPDATE / DELETE
+
+		- POST /productos/stock/consulta
+
+			{
+				"cod": "ABC123",
+				"cantidad": 10
+			}
+
+			{
+				"stockDisponible": true 
+			}
+
+		- PUT /productos/stock/ingreso
+
+			Request:
+
+			{
+				"cod":"ABC123",
+				"cantidad": 100
+			}
+
+			Response: 
+
+			{
+				"cod": "ABC123",
+				"stock": {
+					"cantidad": 205
+				}
+			}
+
+		- DELETE /productos/stock/egreso/:code/:cantidad
+			- /productos/stock/egreso/ABC123/5
+
+			Response: 
+
+				{
+					"cod": "ABC123",
+					"stock": {
+						"cantidad": 100
+					}
+				}
