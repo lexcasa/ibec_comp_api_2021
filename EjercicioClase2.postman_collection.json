@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "4e18a2f3-1e1c-4d61-a620-55a8169468a8",
+		"name": "EjercicioClase2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener items de stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener item por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/id/30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"id",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calcular el total de todos los items de stock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/totalCantidad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"totalCantidad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar items por el nombre del producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/nombreProducto/Naranja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"nombreProducto",
+						"Naranja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar items por el cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/nombreCliente/Rafael",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"nombreCliente",
+						"Rafael"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calcular el total por cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/stock/totalCliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"stock",
+						"totalCliente"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
