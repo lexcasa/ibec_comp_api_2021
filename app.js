@@ -12,6 +12,7 @@ const port = 3000
 app.use(bodyParser.json())
 
 const Producto = require('./services/productos.service')
+const Stock    = require('./services/stock.service')
 
 app.get('/', (req, res) => {
 
@@ -19,6 +20,68 @@ app.get('/', (req, res) => {
   // Con texto plano
   res.send('Bienvenidos a mi API!')
 })
+
+
+//
+// SERVICIO STOCK
+//
+
+// ITEMS DE STOCK
+app.get('/stock/all', (req, res) => {
+  const stock = Stock.getAllStock()
+  res.set('Content-Type', 'application/json')
+  res.send(stock)
+})
+
+// ITEM POR ID
+app.get('/stock/id/:valor', (req, res) => {
+  let item       = {}
+  let items      = Stock.getAllStock()
+  const valor    = req.params.valor;
+  item           = Stock.getStockById(valor, items)
+  res.set('Content-Type', 'application/json')
+  res.send(item)
+})
+
+// ITEM POR NOMBRE DE PRODUCTO
+app.get('/stock/nombreProducto/:valor', (req, res) => {
+  let item       = {}
+  let items      = Stock.getAllStock()
+  const valor    = req.params.valor;
+  item           = Stock.getStockByNombreProducto(valor, items)
+  res.set('Content-Type', 'application/json')
+  res.send(item)
+})
+
+// ITEM POR NOMBRE DE CLIENTE
+app.get('/stock/nombreCliente/:valor', (req, res) => {
+  let item       = {}
+  let items      = Stock.getAllStock()
+  const valor    = req.params.valor;
+  item           = Stock.getStockByNombreCliente(valor, items)
+  res.set('Content-Type', 'application/json')
+  res.send(item)
+})
+
+// TOTAL DE CANTIDAD
+app.post('/stock/totalCantidad', (req, res) => {
+  let items      = Stock.getAllStock()
+  let total      = {}
+  total          = Stock.consultarTotalCantidad(items)
+  res.set('Content-Type', 'application/json')
+  res.send(total)  
+})
+
+//TOTAL POR CLIENTE
+app.post('/stock/totalCliente', (req, res) => {
+  let items      = Stock.getAllStock()
+  let resultado  = {}
+  resultado      = Stock.consultarTotalPorCliente(items)
+  res.set('Content-Type', 'application/json')
+  res.send(resultado)  
+})
+
+
 
 //
 // SERVICIO OBTENER PRODUCTOS
@@ -66,7 +129,7 @@ app.put('/productos/stock/ingreso', (req, res) => {
 })
 
 // Obtener producto por codigo
-app.delete('/productos/:code/:cantidad', (req, res) => {
+app.delete('/productos/stock/egreso/:code/:cantidad', (req, res) => {
 
   let producto   = {}
   let productos  = Producto.getAllProductos()
