@@ -1,0 +1,221 @@
+- Base de datos NOSQL 
+	- MongoDB: Base de datos orientado a documentos
+	- Contempla el paradigma CRUD: Create/Reade/Update/Delete
+
+
+	NOSQL / SQL
+
+	NOSQL: Es un modelo de datos referencial
+	SQL: Es un modelo de datos relacional
+
+
+	Tienda online: 
+		- Productos
+		- Clientes
+
+	SQL: 
+		Producto: (id, nombre, precio)
+			-> (1, Manzana, 10)
+		
+		Cliente: (id, nombre, tipo) -> tipo: ['final','empresa']
+			-> (1, Alex, final)
+
+		Compras: (idProducto, idCliente, cantidad)
+			-> (1, 1, 10)
+
+		Que se compro (Usuario): 
+			-> (Manzana, Alex, 10, Total: 100)
+
+	BASE SQL ---> API ---> GET /compras
+		
+		[
+			{
+				idProducto: 1,
+				idCliente: 1,
+				cantidad: 10
+			}
+		]
+
+	BASE SQL ---> API ---> GET /producto/1
+
+		[
+			{
+				id: 1,
+				nombre: Manzana,
+				precio: 10
+			}
+		]
+
+	BASE SQL ---> API ---> GET /cliente/1
+
+		[
+			{
+				id: 1, 
+				nombre: Alex,
+				tipo: final
+			}
+		]
+
+	BASE SQL ---> API ---> GET /compras (completo)
+
+		[
+			{
+				producto: Manzana,
+				cliente: Alex, 
+				total: 100
+			}
+		]
+
+
+		Una coleccion: Clientes: 
+
+			[
+				{
+					id:1,
+					nombre: Alex, 
+					tipo: final
+				}
+			]
+
+		Una coleccion: Productos:
+
+			[
+				{
+					id: 1, 
+					nombre: Manzana,
+					precio: 10
+				}
+			]
+
+		Coleccion de Compras:
+
+			[
+				{
+					producto: {
+						id: 1,
+						nombre: Manzana,
+						precio: 10
+					},
+					cliente: {
+						id: 1,
+						nombre: Alex,
+						tipo: final
+					},
+					cantidad: 10,
+					total: 100 
+				}
+			]
+
+	- Motor de base de datos MongoDB: 
+		- Servicio de mongodb: https://docs.mongodb.com/v4.4/tutorial/install-mongodb-on-windows-unattended/
+		- Gestor de base de datos: https://robomongo.org
+		- Documentacion: https://docs.mongodb.com/manual/tutorial/query-documents/
+
+
+	- Schema: 
+		Modelo o esqueleto de nuestra coleccion: 
+			- Conceptualmente que es ese modelo 
+			- Propiedades 
+			- Tipo de dato de los valores 
+
+			Producto: (id, nombre, precio, vencido)
+
+			{
+				id: ObjectId, 
+				nombre: String, 
+				precio: Double,
+				vencido: Boolean
+			}
+
+
+			POST /productos
+
+				{
+					nombre: "Manzana",
+					precio: 10.23,
+					vencido: false, 
+					categoria: "Frutas" (x)
+				}
+
+			Dos posibilidades: 
+				- Da error y no deja insertar (x)
+				- O inserta el modelo parcialmente
+
+		----
+
+		Schema de clientes: 
+			
+			{
+				id: ObjectId,
+				nombre: String,
+				tipo: Array (Array de String)
+			}
+
+		----
+
+		Schema de Compras: 
+
+			{
+				cantidad: Int32,
+				total: Double,
+				producto: Object : {
+					nombre: String, 
+					precio: Double
+				},
+				cliente: Object : {
+					nombre: String,
+					tipo: Array
+				}
+			}
+
+	OPERACIONES CRUD: 
+
+	1. Create: 
+
+		[Base de datos].[coleccion].[metodo]
+			- Metodos: 
+				- insertOne({...})
+				- insertMany([{...}, {...}, ...])
+
+		Insertamos un documento: 
+
+		db.clientes.insertOne({
+			"nombre":"Pedro",
+			"tipo":"final"
+		})
+
+		Insertar varios documentos al mismo tiempo:
+
+		db.clientes.insertMany([
+			{
+				"nombre":"Pedro",
+				"tipo":"empresa"
+			},
+			{
+				"nombre":"Juan Martin",
+				"tipo":"final"
+			}
+		])
+
+	2. Read:
+		- Quiero buscar todos los clientes que sean empresa:
+			
+			[base de datos].[metodo](coleccion).[metodo: find](obj)
+
+			db.getCollection('clientes').find({
+				tipo: "empresa"
+			})
+
+		- Quiero encontrar las compras que hizo "Alex"
+
+			MongoDB 4.4:
+			
+			db.getCollection('compras').find({
+				cliente: { nombre: "Alex"}
+			})
+
+			Para versiones anteriores de MongoDB: 
+
+			db.getCollection('compras').find({
+				'cliente.nombre': "Alex"
+			})
