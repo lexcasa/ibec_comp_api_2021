@@ -386,7 +386,7 @@
 			- personas
 			- proveedores
 
-			-> Proveedores y personas tendran en comun solo el campo nombre
+			Obs: Proveedores y personas tendran en comun solo el campo nombre
 
 		2.  -> Schema para Personas
 			-> Schema de proveedores
@@ -395,3 +395,45 @@
 			-> Buscar persona por X, Y propiedad 
 			-> Actualizar una persona por X propiedad 
 			-> Eliminar una persona por Y propiedad
+
+
+		Personas: 
+			(nombre, documento, edad)
+
+		Schema: 
+			Personas: {
+				nombre: String, 
+				documento: String,
+				edad: Int32
+			}
+
+			Insertar un objeto: 
+
+			{
+				"nombre":"Alex",
+				"apellido":""
+			}
+
+		Proveedores: {
+			nombre: String, 
+			rut: Int32,
+			razonSocial: String
+		}
+
+----------
+
+		Personas: 
+
+		db.personas.insertOne({
+			"nombre":"Alex",
+			"documento":"123213",
+			edad: 29
+		})
+
+		Proveedores: 
+
+		db.proveedores.insertOne({
+			"nombre":"Alex",
+			"rut":20123213213,
+			"razonSocial": "Alex SRL"
+		})
