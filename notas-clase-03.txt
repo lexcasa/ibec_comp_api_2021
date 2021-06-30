@@ -209,7 +209,7 @@
 		- Quiero encontrar las compras que hizo "Alex"
 
 			MongoDB 4.4:
-			
+
 			db.getCollection('compras').find({
 				cliente: { nombre: "Alex"}
 			})
@@ -219,3 +219,179 @@
 			db.getCollection('compras').find({
 				'cliente.nombre': "Alex"
 			})
+
+	COMO FUNCIONA LA OPERACION DE CREAR: 
+
+									|- [ ERROR ] ---> [ ERROR DE UI ]
+									|
+	[ COMANDO DE SHELL ] ---> [ MOTOR DE MONGODB ] 
+									|
+									|- [ SUCCESS ] --- > [ RESULTADO ]
+
+
+	EL RESULTADO (OP. LINEAL) NOS DEVUELVE UN OBJ CON DOS PROPIEDADES: 
+
+	{
+	    "acknowledged" : true,
+	    "insertedId" : ObjectId("60dcedca0c229cf748c1e48d")
+	}
+
+	CUANDO LA OPERACION EN BULK (Mas de un elemento) El objeto cambia el insertedId por un array: 
+
+	{
+    	"acknowledged" : true,
+	    "insertedIds" : [ 
+	        ObjectId("60dcee910c229cf748c1e48e"), 
+	        ObjectId("60dcee910c229cf748c1e48f")
+	    ]
+	}
+
+	--- 
+
+	 [ MongoDB ] <-- (Op. CREAR) --> [ API: NodeJS ]
+
+	 API: 
+	 	Si me llega del motor de mongoDB el objeto con propiedad: 
+		 	- insertedId o insertedIds
+		 	- Deduzco que se inserto datos con exito
+		 	- Response de la API: 
+		 		{ success: "Se ingreso los datos correctamente" }
+
+	 	Caso contrario
+	 		{ error: "No se ingreso los datos correctamente."}
+
+	---- 
+
+
+	OPERACION DE READ: 
+
+		- Niveles de profundidad de un objeto: 
+
+		Objeto: { 
+			prop1: "value1",
+			---- N1
+
+			prop2: "value2",
+			prop3: {
+				subProp1: "valueSub1",
+				---- N2
+
+				subProp2: {
+					subSubProp1: "subSubVal1"
+					---- N3 
+				}
+			}
+		}
+
+		N1 - DE BUSQUEDA: 
+		db.getCollection('clientes').find({
+			nombre: "Alex"
+		})
+
+		N2 - DE BUSQUEDA: 
+		db.getCollection('compras').find({
+		    'producto.nombre': "Manzana"
+		})
+
+		N3 - DE BUSQUEDA:
+		db.getCollection('compras').find({
+		    'producto.categoria.nombre': "frutas"
+		})
+
+		Nm - DE BUSQUEDA:
+		db.getCollection('compras').find({
+		    'obj1.subObj1.subSubObj1.[...].mSubObjeto1.mProp1': "mValor1"
+		})
+
+
+	OPERACIONES DE UPDATE: 
+
+		db.collection.updateOne(<filter>, <update>, <options>)
+		db.collection.updateMany(<filter>, <update>, <options>)
+		db.collection.replaceOne(<filter>, <update>, <options>)
+
+
+		OP: updateOne 
+			- Cual es el documento que quiero actualizar
+			- Y por que propiedades debo tomar para actualizar
+
+			OBJETO INICIAL:
+
+			{
+			    "_id" : ObjectId("60dba6072782d7c6ac55ea20"),
+			    "nombre" : "Juan",
+			    "tipo" : "empresa"
+			}
+
+			CAMBIO: 
+
+			db.clientes.updateOne(
+				{
+					"_id": ObjectId("60dba6072782d7c6ac55ea20")
+				},
+				{
+					$set: {
+						"nombre":"Juan II"
+					}
+			})
+
+	---
+
+	OBJ Resultado: 
+
+	TRES POSIBILIDADES: 
+	1. Encontro el registro (matchedCount), luego lo modifico (modifiedCount)
+
+		{
+		    "acknowledged" : true,
+		    "matchedCount" : 1.0,
+		    "modifiedCount" : 1.0
+		}
+
+	2. Encontro el registro, pero no modifico
+	3. No encontro el registro entonces no modifico
+
+	* Utilizariamos: modifiedCount y verificamos si es "1" para saber que el update fue exitoso
+	* Si modifiedCount es "0" entonces arrojamos un error en el update 
+
+
+ OPERACION DE DELETE: 
+
+ 	db.collection.deleteMany()
+	db.collection.deleteOne()
+
+	- Podemos borrar un registro por sus propiedades
+		- Borrar el documento por _id
+
+		db.productos.deleteOne({"_id" : ObjectId("60dba4c62782d7c6ac55e9cc")})
+
+	- Cuando ejecutamos la operacion obtenemos como respuesta el siguiente objeto: 
+
+	{
+	    "acknowledged" : true,
+	    "deletedCount" : 1.0
+	}
+
+	- Para abstraer la respuesta de la API vamos a verificar si deletedCount es 1 entonces se borro correctamente si es 0. Quiere decir que no borro registro
+
+
+	--- 
+
+	EJERCICIO RAPIDO: 
+
+		1. Crear una base de datos usuarios
+			
+			colecciones:
+			
+			- personas
+			- proveedores
+
+			-> Proveedores y personas tendran en comun solo el campo nombre
+
+		2.  -> Schema para Personas
+			-> Schema de proveedores
+
+		3.  -> Crear una operacion para insertar persona 
+			-> Buscar persona por X, Y propiedad 
+			-> Actualizar una persona por X propiedad 
+			-> Eliminar una persona por Y propiedad
