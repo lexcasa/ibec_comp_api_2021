@@ -48,3 +48,27 @@ Modelo: Productos
 
 		- Conectar en la app.js un estado: GET, /productos/buscar/:codigo 
 
+	TAREAS: 
+
+		- Actualizar un producto por ID
+		- Actualizar un prodcuto por Codigo
+		- Borrar un producto por ID
+		- Borrar un producto por codigo
+
+	Obs. Utilizar los estados Update, Delete
+	Ref: https://bitbucket.org/lexart/ibec-componentes-web-apis/src/master/services/mongodb.connect.js
+	Ref: https://www.npmjs.com/package/mongodb
+
+		Eliminar un documento: 
+
+		const removeDocument = function(db, callback) {
+		  // Get the documents collection
+		  const collection = db.collection('documents');
+		  // Delete document where a is 3
+		  collection.deleteOne({ a: 3 }, function(err, result) {
+		    assert.equal(err, null);
+		    assert.equal(1, result.result.n);
+		    console.log('Removed the document with the field a equal to 3');
+		    callback(result);
+		  });
+		};

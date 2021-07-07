@@ -46,6 +46,17 @@ app.get('/productos', (req, res) => {
 	})
 })
 
+app.get('/productos/buscar/:codigo', (req, res) => {
+
+	let codigo 	   = req.params.codigo
+	const Producto = require('./services/producto.service')
+
+	Producto.obtenerProductoPorCodigo( codigo, function (data){
+		res.set('Content-Type', 'application/json')
+	  	res.send(data)
+	})
+})
+
 app.listen(port, () => {
   console.log(`New app listening at http://localhost:${port}`)
 })

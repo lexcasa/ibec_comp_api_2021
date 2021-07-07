@@ -22,6 +22,15 @@ let Producto = {
 		dbService.findProductos(db, {}, function (data){
 			cb({response: data})
 		})
+	},
+	obtenerProductoPorCodigo: function (codigo, cb){
+		if(codigo){
+			dbService.findProductos(db, {codigo: codigo}, function (data){
+				cb({response: data})
+			})
+		} else {
+			cb({error: "Error codigo vacio"})
+		}
 	}
 }
 module.exports = Producto
