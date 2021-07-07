@@ -1,0 +1,50 @@
+- Crear un Backend que cumpla con los requisitos CRUD (Operaciones)
+
+API: 
+
+Modelo: Productos
+	- Create
+		(POST, Ruta)
+
+		POST /productos/new
+		BODY: 
+		
+			{ 
+				"nombre":"Manzana",
+				"precio":100,
+				"moneda":"$",
+				"codigo":"ABC123"
+			}
+
+		----> Nos llega al backend
+				--> Servicio va a capturar los datos
+		----> Almacenar en la base de datos
+				--> Base: tienda (mongodb)
+
+	- Read
+		GET /productos
+		
+		[
+			{...},
+			{...}
+		]
+
+	- Update
+	- Delete
+
+	EJERCICIO RAPIDO: 
+		- Estado: Buscar por codigo
+
+		GET /productos/buscar/:codigo
+		[
+			{...}
+		]
+
+		- Creo una funcion en producto.service
+			- buscarPorCodigo: function (codigo, cb){
+				-> Mismo servicio de obtenerProductos
+				-> Le voy agregar el filtro en el find (Hoy viene con un objeto: {})
+			}
+
+		- Conectar en la app.js un estado: GET, /productos/buscar/:codigo 
+
