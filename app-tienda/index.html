@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+	<h1>{{titulo}}</h1>
+	<div>
+		<button ng-click="showFormFunction()">+Producto</button>
+		<button ng-click="showListFunction()">Productos</button>
+	</div>
+	<div>
+      <!-- Formulario para crear producto -->
+      <form id="crear--producto" ng-if="showForm">
+      	<h2>Crear producto</h2>
+      	<input type="text" ng-model="producto.nombre" name="nombre" placeholder="Nombre producto">
+      	<br>
+      	<input type="number" ng-model="producto.precio" name="precio" placeholder="Precio">
+      	<br>
+      	<select  ng-model="producto.moneda">
+      		<option value="UYU">Pesos</option>
+      		<option value="USD">Dolares</option>
+      	</select>
+      	<br>
+      	<input type="text" ng-model="producto.codigo" name="codigo" placeholder="Codigo">
+      	<br>
+      	<button ng-click="guardaProducto()">Guardar</button>
+      	<button>Cancelar</button>
+      </form>
+    </div>
+    <hr>
+    <div>
+    	<table ng-if="showList">
+    		<thead>
+    			<tr>
+    				<th>ID</th>
+    				<th>Nombre</th>
+    				<th>Precio</th>
+    				<th>Moneda</th>
+    				<th></th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr ng-repeat="producto in productos">
+    				<td>{{producto._id}}</td>
+    				<td>{{producto.nombre}}</td>
+    				<td>{{producto.precio}}</td>
+    				<td>{{producto.moneda}}</td>
+    				<td>
+    					<button>Seleccionar</button>
+    					<button>Eliminar</button>
+    				</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

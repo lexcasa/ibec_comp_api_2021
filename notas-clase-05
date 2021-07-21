@@ -1,0 +1,85 @@
+- RoadMap: 
+	- Backend 
+		- Desarrollar la API
+		- Documentar en Postman
+		- Autenticación con JWT
+		- Acoplar esquema de datos con Mongoose
+
+	- Integración con FrontEnd
+		- AngularJS
+
+- Hacer una prueba de concepto: POC (FrontEnd)
+
+	- Framework de tipo MVC: AngularJS
+	- Integrar la API de api-tienda con la operación CRUD del FrontEnd
+
+
+
+	1. Correr el Backend y consumir la lista de productos desde el FrontEnd
+		- GET /productos
+
+	2. Correr la APP de frontEnd en un servidor web (mini)
+		- http-server
+		- Instalar: npm i -g http-server 
+		- Correr: http-server -p 8000 -c-1
+			- Programa: http-server
+			- Argumentos: -p 8000 (puerto donde va a correr la app), -c-1 (sin cache)
+
+	3. Fundamentos del AngularJS
+
+		1. Framework MVC
+			- Model, View, Controller
+			- Model: API
+			- View: HTML
+			- Controller: Funcionalidades lógicas en el JS
+
+
+		Fw: 	  < JS > ------- < HTML > 
+		Concepto: < Controller > --- < View >
+
+		1.1: Setup de AngularJS
+			- Incrustar el script de la libreria en el head
+			- Instanciar la directiva* ng-app en la etiqueta HTML
+				Ejemplo: <html ng-app>
+				-> Esto indica que estamos dentro de una aplicacion web de angularjs
+			- Caso de prueba: 
+				- Creamos un input que tiene una directiva ng-model="nombreVariable"
+				- Para ver como es ciclo de binding dentro de nuestro HTML
+				- Instanciamos {{nombreVariable}} dentro del body
+
+				1. ng-model a traves de nombreVariable va almacenar lo que el usuario escribe
+				2. Guardo en memoria
+				3. {{nombreVariable}} al hacer el render de la webapp se traduce con los valores que toma 
+					dinamicamente de la variable definida en el ng-model
+
+	4. Operaciones CRUD dentro de la webapp: 
+
+		- CRUD:
+			- Crear producto ( )
+				
+				- View: Formulario
+				- Controller que se va a comunicar con la API
+				- POST /productos/new
+
+			- Editar producto
+			- Listar producto ( )
+				
+				- View: Tabla de productos
+				- Controller que se va a comunicar con la API
+				- GET /productos
+
+			- Obtener producto por ID
+			- Eliminar producto
+
+		
+		Fw: 	  < JS > --- ($scope, $rootScope) ---- < HTML > 
+		Concepto: < Controller > --- < View >
+
+		[ JS (variables) ] ---- ($scope, $rootScope) --> [ HTML ]
+
+		[ JS (variables) ] <--- (ng-model, ng-click) --- [ HTML ]
+
+		ng-model: Capturo los datos del formulario
+		ng-click: Determino el evento de activacion del form
+
+		
