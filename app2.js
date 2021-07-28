@@ -5,18 +5,19 @@ const port = 3000
 app.use(bodyParser.json())
 const stock = require('./services/stock.service.js')
 
+
 app.get ('/', (req, res) => {
     res.send('Bienvenidos a mi API!')
 })
 
 
-//Stock ->
+//ItemsStock ->
 app.get('/stock/all', (req, res) => {
     let stock    = require('.stock/services');
     let response = stock.obtenerStock();
 
     res.set('Content-Type', 'application/json')
-    res.send(stock);
+    res.send(response);
 });
 
 
@@ -24,24 +25,36 @@ app.get('/stock/all', (req, res) => {
 app.get('/stock/:id', function (req, res) {
     let Stock   = require('./stock.services');
     let id      = req.params.id;
-    let stocks  = Stock.getAllStocks();
 
     let response = stock.obtenerItemPorId(stock, id);
     res.set('Content-Type', 'application/json')
-    res.send(response)
+    res.send(id)
 });
 
 //ItemsNombre ->
-app.post('/stock/nombre', function (req, res) {
-    let Stock    = require('./stock.services');
-    let post     = req.body;
-    let stocks   = stock.obtenerStock();
-    let nombres  = Stock.obtenerItemPorNombre(productos, post)
+app.get('/stock/nombrestock', function (req, res) {
+    let item     = require('./stock.services');
+    let item     = {};
+    let item     = stock.obtenerItem();
+    let nombres  = Stock.obtenerItemPorNombre(item)
     let response = nombres
 
     res.set('Content-Type', 'application/json')
-    res.send(response);
+    res.send(nombre);
 });
+
+// NombreCliente ->
+app.get('/stock/:client', function (req, res) {
+    let stock     = require('./stock.services');
+    let stock      = req.params.client;
+    let nombre   = stock.obtenerCliente();
+    let nombre    = Stock.obtenerNombreCliente(nombreCliente)
+    let response  = nombre
+    
+    res.set('Content-Type', 'application/json')
+    res.send(cliente);
+})
+
 
 
 
