@@ -1,7 +1,7 @@
 const express    = require('express')
 const cors 		 = require('cors')
 const bodyParser = require('body-parser')
-global.dbService  = require('./services/db.service')
+global.dbService  = require('./services/mdb.service')
 
 // invocar el express dentro la app
 const app = express()
@@ -32,6 +32,43 @@ app.post('/productos/new', (req, res) => {
 		// Recien libera la respuesta
 		// response o error
 		// data.response o data.error
+		
+		res.set('Content-Type', 'application/json')
+	  	res.send(data)
+	})
+})
+
+app.put('/productos/:id', (req, res) => {
+
+	const Producto = require('./services/producto.service')
+	let id 	   = req.params.id
+	
+	Producto.editarProducto(req.body, id, function (data) {
+		
+		res.set('Content-Type', 'application/json')
+	  	res.send(data)
+	})
+})
+
+
+app.delete('/productos/:id', (req, res) => {
+
+	const Producto = require('./services/producto.service')
+	let id 	   = req.params.id
+	
+	Producto.eliminarProducto(id, function (data) {
+		
+		res.set('Content-Type', 'application/json')
+	  	res.send(data)
+	})
+})
+
+app.get('/productos/:id', (req, res) => {
+
+	const Producto = require('./services/producto.service')
+	let id 	   = req.params.id
+	
+	Producto.obtenerProductoPorId(id, function (data) {
 		
 		res.set('Content-Type', 'application/json')
 	  	res.send(data)

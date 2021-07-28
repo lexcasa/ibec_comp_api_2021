@@ -1,0 +1,46 @@
+- API: 
+	- Editar por ID
+	- Eliminar por ID
+	- Obtener por ID
+
+- Crear postman con casos de prueba
+	
+	- Crear producto (OK)
+	- Listar productos (OK)
+	- Buscar producto por Codigo (OK)
+	- Editar producto por ID (OK)
+	- Eliminar producto por ID (OK)
+	- Obtener producto por ID (OK)
+
+Manejar abstracciones de comunicacion con el frontEnd: 
+
+	- Si los datos son correctos / la peticion es correcta
+
+		- Servidor: Status code: 200 OK
+		- Devolver un objeto: { response: [...] }
+		- response: 
+			- {} o un array []
+			- Va a depender de que sea el servicio
+			- Si es un servicio lista datos, entonces nos va a devolver un []
+			- Si es un servicio que nos devuelve un unico dato, nos va a devolver un {}
+
+	- Si los datos son incorrectos [o la peticion es incorrecta]
+
+		- Servidor: Status code: 200 OK
+		- Devolver un objeto: { error: {...}} o string
+		- error: 
+			- {} o un string "xxxx"
+			- Va a depender de que sea el servicio
+			- Tengo un formulario tiene x campos con y validaciones
+				{
+					error: {
+						campo: "nombre",
+						mensaje: "No cumple con el largo 10"
+					}
+				}
+
+			- Validaciones mas genericas
+				{
+					error: "No se pudo ingresar el usuario"
+				}
+    ---- 

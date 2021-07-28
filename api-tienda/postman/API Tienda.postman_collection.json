@@ -1,0 +1,971 @@
+{
+	"info": {
+		"_postman_id": "64837ee1-cc0b-4ca4-ae7a-ddfc3b60765f",
+		"name": "API Tienda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener todos los productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/productos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso error para obtener productos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"27-YMJA7nukWzTx+wLEbujPnVFYSqs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:31:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No se encontraro productos.\"\n}"
+				},
+				{
+					"name": "Caso success para obtener productos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "507"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1fb-0NgdSiYLz6cATCWRmfaJAFHG3qU\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:14:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": [\n        {\n            \"_id\": \"60e62e51be64ad39f4ad061b\",\n            \"nombre\": \"Banana\",\n            \"precio\": 100,\n            \"moneda\": \"$\",\n            \"codigo\": \"ABC123\"\n        },\n        {\n            \"_id\": \"60e62f0a8e69b542e801c55b\",\n            \"nombre\": \"Pera\",\n            \"precio\": 100,\n            \"moneda\": \"$\",\n            \"codigo\": \"ABBB123\"\n        },\n        {\n            \"_id\": \"60e6307fe05c5b2bac9f0d00\",\n            \"nombre\": \"Manzana\",\n            \"precio\": 100,\n            \"moneda\": \"$\",\n            \"codigo\": \"ABBB123\"\n        },\n        {\n            \"_id\": \"60f8ada016b60843c8daff19\",\n            \"nombre\": \"Naranja\",\n            \"precio\": 100,\n            \"moneda\": \"UYU\",\n            \"codigo\": \"asdsad1231\"\n        },\n        {\n            \"_id\": \"60f8adcb16b60843c8daff1a\",\n            \"nombre\": \"Test\",\n            \"precio\": 123,\n            \"moneda\": \"USD\",\n            \"codigo\": \"asd123\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"Manzana\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"ABC123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/productos/new",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos",
+						"new"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso success de crear producto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Manzana\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"ABC123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/productos/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"new"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"30-ZLNx4pxn/5U9xrvDCg3PXHEMxgA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:42:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": \"Producto insertado correctamente.\"\n}"
+				},
+				{
+					"name": "Caso error crear producto",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Manzana\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/productos/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"new"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-q1/Elq6taSt3KfNpiMKIKumLPdI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:43:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Error. Producto vacio\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Buscar producto por codigo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/productos/buscar/ABC123",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos",
+						"buscar",
+						"ABC123"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso de error #2 - buscar producto",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/buscar/ ",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"buscar",
+								" "
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "30"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e-rF0O0VVNK6+PbVMphbWBy541Cto\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:53:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Error codigo vacio\"\n}"
+				},
+				{
+					"name": "Caso de error #1 - buscar producto",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/buscar/acc123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"buscar",
+								"acc123"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"24-pqVtQIN9X/3b+iZxTh2z5vWuuMo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:50:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No se encontro producto.\"\n}"
+				},
+				{
+					"name": "Caso success de buscar producto por codigo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/buscar/ABC123",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"buscar",
+								"ABC123"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-XZl88ZI6cgqkg4HXVzUm00D6taM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 22:48:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"_id\": \"6101dd4d457dae338c99740d\",\n        \"nombre\": \"Manzana\",\n        \"precio\": 200,\n        \"moneda\": \"UYU\",\n        \"codigo\": \"ABC123\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Editar producto por ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"Uva\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"ABC123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/productos/6101dd4d457dae338c99740d",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos",
+						"6101dd4d457dae338c99740d"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso de error #2 - Editar producto por ID (No edito el producto sin codigo)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Uva\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/productos/6101dd4d457dae338c99740d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101dd4d457dae338c99740d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21-q1/Elq6taSt3KfNpiMKIKumLPdI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:04:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Error. Producto vacio\"\n}"
+				},
+				{
+					"name": "Caso de error #1 - Editar producto por ID (el documento no se modifico)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Uva\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"ABC123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/productos/6101dd4d457dae338c99740d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101dd4d457dae338c99740d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "237"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ed-OOVHte4qJDZTK1OQKQPzvOP+Y2Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:04:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Error al editar producto.\",\n    \"stack\": {\n        \"result\": {\n            \"n\": 1,\n            \"nModified\": 0,\n            \"ok\": 1\n        },\n        \"connection\": {\n            \"id\": 0,\n            \"host\": \"localhost\",\n            \"port\": 27017\n        },\n        \"modifiedCount\": 0,\n        \"upsertedId\": null,\n        \"upsertedCount\": 0,\n        \"matchedCount\": 1,\n        \"n\": 1,\n        \"nModified\": 0,\n        \"ok\": 1\n    }\n}"
+				},
+				{
+					"name": "Caso success: Editar producto por ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Uva\",\r\n    \"precio\":200,\r\n    \"moneda\":\"UYU\",\r\n    \"codigo\":\"ABC123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/productos/6101dd4d457dae338c99740d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101dd4d457dae338c99740d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-P/QIdk42m6/Gk0n/NSf37v7eX78\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:00:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": \"Producto editado correctamente.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar producto por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/productos/6101e508bafdb83accaa22c6",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos",
+						"6101e508bafdb83accaa22c6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso success: Eliminar producto por ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/6101e508bafdb83accaa22c6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101e508bafdb83accaa22c6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"30-YWyNvy+S0iWvHtwe52EenITICOk\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:15:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": \"Producto eliminado correctamente.\"\n}"
+				},
+				{
+					"name": "Caso error: Eliminar producto",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/6101dd4d457dae338c99740d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101dd4d457dae338c99740d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "44"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2c-K000fogsnKzr58SAU/N+Nj17xmA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:14:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No se pudo eliminar el producto.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener producto por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/productos/6101e5fb0ca56810d408f843",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productos",
+						"6101e5fb0ca56810d408f843"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caso success: obtener producto por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/6101e5fb0ca56810d408f843",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101e5fb0ca56810d408f843"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"70-3qcDPMtudDUOVZaFH7efJFXLgdg\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:22:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"_id\": \"6101e5fb0ca56810d408f843\",\n        \"nombre\": \"Manzana\",\n        \"precio\": 200,\n        \"moneda\": \"UYU\",\n        \"codigo\": \"ABC123\"\n    }\n}"
+				},
+				{
+					"name": "Caso de error: Obtener producto por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/productos/6101e5fb0ca56810d408f842",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"productos",
+								"6101e5fb0ca56810d408f842"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"24-pqVtQIN9X/3b+iZxTh2z5vWuuMo\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jul 2021 23:23:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No se encontro producto.\"\n}"
+				}
+			]
+		}
+	]
+}

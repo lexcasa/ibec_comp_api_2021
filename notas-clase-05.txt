@@ -82,4 +82,8 @@
 		ng-model: Capturo los datos del formulario
 		ng-click: Determino el evento de activacion del form
 
-		
+
+	TAREAS: 
+		- API: Editar producto por ID
+		- APP: Integrar el editar producto por ID
+
