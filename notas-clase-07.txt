@@ -1,0 +1,19 @@
+- Integracion API Tienda
+
+	- Crear un script: 
+		- dev: "http-server -p 8080 -c-1"
+		Para estandarizar el flujo de ejecucion de las apps
+	---
+
+	- Integrar el ABM contra la aplicacion de AngularJS
+
+		CRUD: 
+			- Create (OK)
+			- Read
+				- Listado de productos (OK)
+				- Buscar por codigo    (OK)
+				- Obtener producto por ID (OK)
+			- Update: 
+				- Editar producto por ID (OK)
+			- Delete: 
+				- Eliminar producto por ID (OK)

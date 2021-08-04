@@ -30,8 +30,13 @@
       </form>
     </div>
     <hr>
-    <div>
-    	<table ng-if="showList">
+    <div ng-if="showList">
+      <!-- Buscar producto por codigo -->
+      <div>
+        <input type="text" name="" ng-model="query.codigo">
+        <button ng-click="buscarProductoPorCodigo()">Buscar producto</button>
+      </div>
+    	<table>
     		<thead>
     			<tr>
     				<th>ID</th>
@@ -42,16 +47,21 @@
     			</tr>
     		</thead>
     		<tbody>
-    			<tr ng-repeat="producto in productos">
+    			<tr ng-repeat="producto in productos" ng-if="!noResults">
     				<td>{{producto._id}}</td>
     				<td>{{producto.nombre}}</td>
     				<td>{{producto.precio}}</td>
     				<td>{{producto.moneda}}</td>
     				<td>
-    					<button>Seleccionar</button>
-    					<button>Eliminar</button>
+    					<button ng-click="seleccionarProducto(producto._id)">Seleccionar</button>
+    					<button ng-click="eliminarProductoPorId(producto._id)">Eliminar</button>
     				</td>
     			</tr>
+          <tr ng-if="noResults">
+            <td colspan="5">
+              {{noResultsMsg}}
+            </td>
+          </tr>
     		</tbody>
     	</table>
     </div>

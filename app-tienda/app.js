@@ -13,6 +13,8 @@ app.controller('MainCtrl', ['$scope','$http', function ($scope, $http) {
 	$scope.showForm = false
 	$scope.showList = false
 
+	$scope.query 	= {}
+
 	$scope.showFormFunction = function (){
 		$scope.showForm = true
 		$scope.showList = false
@@ -34,10 +36,39 @@ app.controller('MainCtrl', ['$scope','$http', function ($scope, $http) {
 	$scope.guardaProducto = function (){
 		console.log("$scope.producto: ", $scope.producto)
 
-		let model = '/productos/new'
-		$http.post(API + model, $scope.producto).then( function (success){
+		// let model = '/productos/new'
+		let model = {
+			'crear': ['post', '/productos/new'],
+			'editar': ['put', '/productos/']
+		}
+			
+		// Estado por defecto:
+		let accion = 'crear'
+		let id 	   = ''
+
+		if($scope.producto._id){
+			// Estado editar si nos viene la ID
+			accion = 'editar'
+			id 	   = $scope.producto._id
+		}
+
+		// Si el estado es por defecto
+		// model['crear'][0] -> 'post'
+		let metodo = model[accion][0]
+
+		// model['crear'][1] -> '/productos/new'
+		let url    = API + model[accion][1] + id
+
+		$http[metodo](url, $scope.producto).then( function (success){
 			console.log("success obj post: ", success)
-			alert(success.data.response)
+
+			if(!success.data.error){
+				$scope.producto = {}
+				alert(success.data.response)
+			} else {
+				alert(success.data.error)
+			}
+			
 			
 		}, function (error){
 			console.log("error obj post: ", error)
@@ -45,7 +76,10 @@ app.controller('MainCtrl', ['$scope','$http', function ($scope, $http) {
 	}
 
 	$scope.obtenerListadoProducto = function (){
+	
 		let model = '/productos'
+
+		$scope.resetMsgs()
 
 		$http.get(API + model).then( function (success){
 			console.log("success obj: ", success)
@@ -58,6 +92,72 @@ app.controller('MainCtrl', ['$scope','$http', function ($scope, $http) {
 		}, function (error){
 			alert("Error al obtener productos.")
 		})
+	}
+
+	$scope.noResults = false
+	$scope.noResultsMsg = ''
+
+	$scope.resetMsgs = function (){
+		$scope.noResults = false
+		$scope.noResultsMsg = ''
+		$scope.query.codigo = ''
+	}
+
+	$scope.buscarProductoPorCodigo = function (){
+		let codigo = $scope.query.codigo.toUpperCase()
+		let model = '/productos/buscar/'
+		let url   = API + model + codigo
+
+		$scope.resetMsgs()
+
+		$http.get(url).then( function (success){
+			console.log("success: ", success.data)
+
+			// Asumimos que nos viene datos
+			if(!success.data.error){
+				$scope.productos = [success.data.response]
+			} else {
+				$scope.noResults 	= true
+				$scope.noResultsMsg = success.data.error
+				$scope.query.codigo = ''
+			}
+		}, function (error){
+			console.log("error buscar producto por Codigo", error)
+		})
+
+		console.log("query: ", codigo)
+	}
+
+	$scope.seleccionarProducto = function (id){
+		let model = '/productos/'
+		let url   = API + model + id
+
+		$http.get(url).then( function (success){
+
+			if(!success.data.error){
+				$scope.producto = success.data.response
+				$scope.showFormFunction()
+			} else {
+				alert(success.data.error)
+			}
+		})
+	}
+
+	$scope.eliminarProductoPorId = function (id){
+		if(confirm("Esta seguro que desea eliminar el producto?")){
+			let model = '/productos/'
+			let url   = API + model + id
+
+			$http.delete(url).then( function (success){
+				if(!success.data.error){
+					// alert(success.data.response)
+
+					$scope.obtenerListadoProducto()
+				} else {
+					alert(success.data.error)
+				}
+			})
+		}
 	}
 }])
 

@@ -55,7 +55,7 @@ let Producto = {
 				if(data && data.length > 0){
 					cb({response: data[0]})
 				} else {
-					cb({error: "No se encontro producto."})
+					cb({error: "No se encontro producto para el codigo: " + codigo})
 				}
 			})
 		} else {
@@ -85,7 +85,7 @@ let Producto = {
 			if(data && data.deletedCount > 0){
 				cb({response: "Producto eliminado correctamente."})
 			} else {
-				cb({error: "No se pudo eliminar el producto."})
+				cb({error: "No se pudo eliminar el producto.", stack: data})
 			}
 		})
 	}
