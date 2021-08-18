@@ -9,8 +9,24 @@ const app = express()
 // Defino el puerto donde va a escuchar esta API REST
 const port = 3000
 
+
+let middlewareToken = (req, res, next) => {
+	console.log("MID ::", req.headers)
+
+	if(req.headers.token == 'alex123'){
+		next()
+	} else {
+		res.send({error: "Error en validacion del token"})
+	}
+	// res.send("Hola")
+	
+}
+
 app.use(cors())
 app.use(bodyParser.json())
+
+// Para utilizar el middleware
+// app.use(middlewareToken)
 
 app.get('/', (req, res) => {
 
@@ -20,7 +36,7 @@ app.get('/', (req, res) => {
 })
 
 // PRODUCTOS API
-app.post('/productos/new', (req, res) => {
+app.post('/productos/new', middlewareToken, (req, res) => {
 
 	const Producto = require('./services/producto.service')
 	

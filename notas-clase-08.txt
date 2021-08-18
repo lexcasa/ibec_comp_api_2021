@@ -1,0 +1,33 @@
+Arrow function: () => { .. }
+Function: function (){ ... }
+
+let persona = { 
+	nombre: "Alex",
+	apellido: "Casadevall",
+	getFullName: function (){
+		return this.nombre + " " + this.apellido
+	},
+	getPathName: () => {
+		console.log(this.name)
+	}
+}
+
+let myFunction = function (){
+	console.log(arguments)
+}
+
+myFunction([1,2,3])
+
+
+let myFunctionArrow = () => {
+	console.log(arguments)
+}
+
+myFunctionArrow([1,2,3])
+
+let arr2 = (x,y) => x + y
+
+Middlewares: 
+
+	Request ----> [Middleware] -- (OK) ---> Response #1
+					|____ (ERR) ---> Response #2 
